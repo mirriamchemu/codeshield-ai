@@ -1,0 +1,280 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #0b1120;
+  color: #e5e7eb;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #111827;
+  border-right: 1px solid #273244;
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #38bdf8;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 48px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.nav-item.active {
+  background: #1e3a5f;
+  color: #7dd3fc;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 14px;
+  border-top: 1px solid #273244;
+}
+
+.sidebar-footer p {
+  margin: 0 0 5px;
+  font-size: 13px;
+}
+
+.sidebar-footer small {
+  color: #64748b;
+  font-size: 11px;
+}
+
+/* Main workspace */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 40px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.language-badge {
+  padding: 8px 16px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #7dd3fc;
+  font-size: 13px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 20px;
+}
+
+.panel {
+  min-width: 0;
+  background: #111827;
+  border: 1px solid #273244;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 20px;
+  border-bottom: 1px solid #273244;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.panel-body {
+  padding: 20px;
+  min-height: 400px;
+}
+
+.editor-placeholder,
+.findings-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .brand {
+    margin-bottom: 20px;
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}
+
+/* Monaco Editor */
+.code-editor-container {
+  padding: 0;
+  min-height: 450px;
+  overflow: hidden;
+}
+
+.code-editor-container .monaco-editor {
+  border-radius: 0 0 12px 12px;
+}
+
+
+/* Analyze button */
+.editor-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.analyze-button {
+  background: #0284c7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.analyze-button:hover:not(:disabled) {
+  background: #0369a1;
+}
+
+.analyze-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Findings */
+.findings-empty {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.findings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.findings-summary {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.finding-card {
+  padding: 16px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+}
+
+.finding-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finding-heading strong {
+  font-size: 12px;
+}
+
+.finding-line {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.finding-card p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.finding-card code {
+  color: #93c5fd;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.severity-error {
+  color: #f87171;
+}
+
+.severity-warning {
+  color: #fbbf24;
+}
+
+.severity-info {
+  color: #38bdf8;
+}
