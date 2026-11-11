@@ -169,3 +169,14 @@
     padding: 20px;
   }
 }
+
+/* Monaco Editor */
+.code-editor-container {
+  padding: 0;
+  min-height: 450px;
+  overflow: hidden;
+}
+
+.code-editor-container .monaco-editor {
+  border-radius: 0 0 12px 12px;
+}

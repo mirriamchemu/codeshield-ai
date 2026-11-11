@@ -1,8 +1,19 @@
 
 import { Code2, LayoutDashboard, History, ShieldCheck } from 'lucide-react'
 import './App.css'
+import { useState } from 'react'
+import CodeEditor from './components/editor/CodeEditor'
 
 function App() {
+
+  const [sourceCode, setSourceCode] = useState<string>(
+    `public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello CodeShield AI!");
+    }
+}`
+  )
+
   return (
     <div className="app-layout">
       {/* Sidebar navigation */}
@@ -52,9 +63,13 @@ function App() {
               <h2>Java Code Editor</h2>
             </div>
 
-            <div className="panel-body editor-placeholder">
-              Monaco Editor will appear here.
+            <div className="panel-body code-editor-container">
+              <CodeEditor
+                value={sourceCode}
+                onChange={setSourceCode}
+              />
             </div>
+
           </div>
 
           <div className="panel">
