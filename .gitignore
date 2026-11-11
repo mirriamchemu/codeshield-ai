@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Java
+target/
+*.class
+.idea/
+
+# Node
+node_modules/
+dist/
+coverage/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Scanner submissions
+scan-workspaces/
