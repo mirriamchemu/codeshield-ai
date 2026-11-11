@@ -3,16 +3,48 @@ import { Code2, LayoutDashboard, History, ShieldCheck } from 'lucide-react'
 import './App.css'
 import { useState } from 'react'
 import CodeEditor from './components/editor/CodeEditor'
+import FindingsPanel from './components/findings/FindingsPanel'
+import type { Finding } from './types/scan'
 
 function App() {
 
   const [sourceCode, setSourceCode] = useState<string>(
     `public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello CodeShield AI!");
-    }
-}`
+        public static void main(String[] args) {
+            System.out.println("Hello CodeShield AI!");
+        }
+    }`
   )
+
+
+  const [findings, setFindings] = useState<Finding[]>([])
+  const [hasScanned, setHasScanned] = useState(false)
+  const [isScanning, setIsScanning] = useState(false)
+
+  /**
+   * Temporary mock scan.
+   * This does not analyze the submitted source code.
+   */
+  function handleAnalyze() {
+    setIsScanning(true)
+    setHasScanned(false)
+
+    // Simulate a scanner response for UI development.
+    setTimeout(() => {
+      setFindings([
+        {
+          ruleId: 'codeshield.java.hardcoded-password',
+          message: 'A password appears to be hardcoded in the source code.',
+          severity: 'WARNING',
+          line: 3,
+        },
+      ])
+
+      setHasScanned(true)
+      setIsScanning(false)
+    }, 800)
+  }
+
 
   return (
     <div className="app-layout">
@@ -59,9 +91,20 @@ function App() {
 
         <section className="workspace">
           <div className="panel">
-            <div className="panel-header">
+
+            <div className="panel-header editor-panel-header">
               <h2>Java Code Editor</h2>
+
+              <button
+                type="button"
+                className="analyze-button"
+                onClick={handleAnalyze}
+                disabled={isScanning || !sourceCode.trim()}
+              >
+                {isScanning ? 'Analyzing...' : 'Analyze Code'}
+              </button>
             </div>
+
 
             <div className="panel-body code-editor-container">
               <CodeEditor
@@ -77,8 +120,11 @@ function App() {
               <h2>Security Findings</h2>
             </div>
 
-            <div className="panel-body findings-placeholder">
-              Scan results will appear here.
+            <div className="panel-body">
+              <FindingsPanel
+                findings={findings}
+                hasScanned={hasScanned}
+              />
             </div>
           </div>
         </section>

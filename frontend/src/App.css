@@ -180,3 +180,101 @@
 .code-editor-container .monaco-editor {
   border-radius: 0 0 12px 12px;
 }
+
+
+/* Analyze button */
+.editor-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.analyze-button {
+  background: #0284c7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.analyze-button:hover:not(:disabled) {
+  background: #0369a1;
+}
+
+.analyze-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Findings */
+.findings-empty {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.findings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.findings-summary {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.finding-card {
+  padding: 16px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+}
+
+.finding-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finding-heading strong {
+  font-size: 12px;
+}
+
+.finding-line {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.finding-card p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.finding-card code {
+  color: #93c5fd;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.severity-error {
+  color: #f87171;
+}
+
+.severity-warning {
+  color: #fbbf24;
+}
+
+.severity-info {
+  color: #38bdf8;
+}
