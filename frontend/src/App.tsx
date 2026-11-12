@@ -5,6 +5,7 @@ import { useState } from 'react'
 import CodeEditor from './components/editor/CodeEditor'
 import FindingsPanel from './components/findings/FindingsPanel'
 import type { Finding } from './types/scan'
+import { createScan } from './api/scans'
 
 function App() {
 
@@ -20,31 +21,46 @@ function App() {
   const [findings, setFindings] = useState<Finding[]>([])
   const [hasScanned, setHasScanned] = useState(false)
   const [isScanning, setIsScanning] = useState(false)
+  const [scanError, setScanError] = useState<string | null>(null)
 
   /**
    * Temporary mock scan.
    * This does not analyze the submitted source code.
    */
-  function handleAnalyze() {
+  async function handleAnalyze() {
     setIsScanning(true)
     setHasScanned(false)
+    setScanError(null)
+    setFindings([])
 
-    // Simulate a scanner response for UI development.
-    setTimeout(() => {
-      setFindings([
-        {
-          ruleId: 'codeshield.java.hardcoded-password',
-          message: 'A password appears to be hardcoded in the source code.',
-          severity: 'WARNING',
-          line: 3,
-        },
-      ])
+    try {
+      const result = await createScan({
+        language: 'java',
+        filename: 'Main.java',
+        sourceCode,
+      })
 
+      if (result.status === 'FAILED') {
+        throw new Error(result.error ?? 'Code analysis failed.')
+      }
+
+      if (result.status !== 'COMPLETED') {
+        throw new Error(`Unexpected scan status: ${result.status}`)
+      }
+
+      setFindings(result.findings)
       setHasScanned(true)
-      setIsScanning(false)
-    }, 800)
-  }
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred during analysis.'
 
+      setScanError(message)
+    } finally {
+      setIsScanning(false)
+    }
+  }
 
   return (
     <div className="app-layout">
@@ -121,6 +137,12 @@ function App() {
             </div>
 
             <div className="panel-body">
+              {scanError && (
+                <div className="scan-error" role="alert">
+                  <strong>Scan failed:</strong> {scanError}
+                </div>
+              )}
+
               <FindingsPanel
                 findings={findings}
                 hasScanned={hasScanned}

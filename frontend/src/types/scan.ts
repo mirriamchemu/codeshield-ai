@@ -32,3 +32,9 @@ export interface ScanResult {
     findings: Finding[]
     error?: string
 }
+
+export interface ScanRequest {
+    language: string
+    filename: string
+    sourceCode: string
+}
